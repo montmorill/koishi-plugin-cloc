@@ -1,6 +1,5 @@
 import { Context, h, Schema } from 'koishi'
 import { spawn } from 'node:child_process'
-import {} from '@koishijs/loader'
 import {} from '@koishijs/plugin-hmr'
 
 export const name = 'cloc'
