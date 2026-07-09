@@ -3,7 +3,6 @@ import { spawn } from 'node:child_process'
 import {} from '@koishijs/loader'
 import {} from '@koishijs/plugin-hmr'
 
-
 export const name = 'cloc'
 
 export interface Config {
