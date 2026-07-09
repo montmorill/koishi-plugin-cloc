@@ -20,7 +20,7 @@ export function apply(ctx: Context, config: Config) {
     const proc = await spawn('wsl', [
       'cloc',
       '--exclude-dir', config.excludeDirs.join(','),
-      '--include_ext', config.includeExts.join(','),
+      '--include-ext', config.includeExts.join(','),
       config.workingDir, '--json'
     ], { stdio: 'pipe' })
 
