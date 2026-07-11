@@ -1,8 +1,9 @@
-import { Context, h, Schema } from 'koishi'
+import { Context, h, Logger, Schema } from 'koishi'
 import { spawn } from 'node:child_process'
 import {} from '@koishijs/plugin-hmr'
 
 export const name = 'cloc'
+const logger = new Logger(name)
 
 export interface Config {
   excludeDirs: string[]
@@ -11,7 +12,7 @@ export interface Config {
 }
 
 export const Config: Schema<Config> = Schema.object({
-  excludeDirs: Schema.array(Schema.string()).default(['node_modules', 'dist', 'satori']),
+  excludeDirs: Schema.array(Schema.string()).default(['node_modules', 'dist', 'lib', 'satori']),
   includeExts: Schema.array(Schema.string()).default(['ts', 'yml']),
   workingDir: Schema.string().default('external'),
 })
@@ -28,6 +29,8 @@ async function countLoc(config: Config): Promise<number> {
   for await (const chunk of proc.stdout)
     buffer += chunk
   const data = JSON.parse(buffer)
+  delete data.header
+  logger.info('%o', data)
   return data.SUM.code
 }
 
