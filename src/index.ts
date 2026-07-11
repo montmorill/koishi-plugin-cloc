@@ -1,9 +1,8 @@
-import { Context, h, Logger, Schema } from 'koishi'
+import { Context, Schema } from 'koishi'
 import { spawn } from 'node:child_process'
 import {} from '@koishijs/plugin-hmr'
 
 export const name = 'cloc'
-const logger = new Logger(name)
 
 export interface Config {
   excludeDirs: string[]
@@ -30,7 +29,6 @@ async function countLoc(config: Config): Promise<number> {
     buffer += chunk
   const data = JSON.parse(buffer)
   delete data.header
-  logger.info('%o', data)
   return data.SUM.code
 }
 
